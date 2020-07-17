@@ -1,0 +1,28 @@
+server:
+  port: 7001
+# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+eureka:
+  client:
+    service-url:
+      #集群,设置与eureka server交互地址查询服务和注册服务都需要依赖的地址,多于两个注册中心则要将除了自己以外服务中心地址全部写上逗号分隔,defaultZone: 服务中心,服务中心
+      #defaultZone: http://eureka7002.com:7002/eureka
+      #单机版
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+    register-with-eureka: false #false不向服务中心注册自己
+    fetch-registry: false  #false自己就是注册中心，维护服务实例，不需要检索服务
+  instance:
+    hostname: eureka7001.com
+    #注册服务向注册服务中心发送心跳时间间隔设置（默认30秒）
+    #lease-renewal-interval-in-seconds: 2
+    #注册服务中心收到最后一次心跳等待时间间隔设置(默认90秒)
+    #lease-expiration-duration-in-seconds: 4
+  #server:
+    #关闭服务注册中心自动保护功能,注册服务不可用直接剔除
+    #enable-self-preservation: false
+    #注册服务不可用后保留时间注册时间
+    #eviction-interval-timer-in-ms: 2000
+#指定应用名称
+spring:
+  application:
+    name: eureka-server
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljl.springcloud.dao.PaymentDao">
+    <sql id="paymentColumns">
+        a.id AS "id",
+        a.serial AS "serial"
+    </sql>
+
+    <select id="getPaymentId" resultType="Payment">
+        select
+            <include refid="paymentColumns"/>
+        from
+        payment a
+        <where>
+            a.id = #{id}
+        </where>
+    </select>
+
+    <select id="findList" parameterType="Long" resultType="Payment">
+        select
+        <include refid="paymentColumns"/>
+        from
+        payment a
+    </select>
+
+    <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(
+            serial
+        )
+        values
+        (
+            #{serial}
+        )
+    </insert>
+</mapper>

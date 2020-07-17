@@ -1,0 +1,18 @@
+server:
+  port: 8103
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+    register-with-eureka: true #false不向服务中心注册自己
+    fetch-registry: true
+#设置fegin客户端超时时间，openfegin集成ribbon
+ribbon:
+  #指的是建立连接所用的时间，适用网络状况正常情况下，两端连接时间
+  ReadTimeout:  5000
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectTimeout: 5000
+logging:
+  level:
+    #feign日志级别监控接口
+    com.ljl.springcloud.service.PaymentFeignService: debug

@@ -1,0 +1,18 @@
+server:
+  port: 7002
+# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+eureka:
+  client:
+    service-url:
+      #集群,设置与eureka server交互地址查询服务和注册服务都需要依赖的地址,多于两个注册中心则要将除了自己以外服务中心地址全部写上逗号分隔,defaultZone: 服务中心,服务中心
+      #defaultZone: http://eureka7001.com:7001/eureka
+      #单机版
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+    register-with-eureka: false #false不向服务中心注册自己
+    fetch-registry: false  #false自己就是注册中心，维护服务实例，不需要检索服务
+  instance:
+    hostname: eureka7002.com
+#指定应用名称
+spring:
+  application:
+    name: eureka-server

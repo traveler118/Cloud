@@ -1,0 +1,27 @@
+server:
+  port: 8002
+eureka:
+  client:
+    service-url:
+      #集群注册实例，单机版注册中心也可使用
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+      #单机注册实例
+      #defaultZone: http://eureka7001.com:7001/eureka
+    register-with-eureka: true #false不向服务中心注册自己
+    fetch-registry: true
+  instance:
+    instance-id: payment8002 #显示在服务注册中心status名称
+    prefer-ip-address: true #鼠标放置到服务注册中心status名称上浏览器左下角显示访问路径ip地址
+spring:
+  application:
+    #集群，相同业务功能服务名称相同
+    name: cloud-payment-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource #当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://127.0.0.1:3307/b_xuexi?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ljl.springcloud.entities #所有Entity别名类所在包
